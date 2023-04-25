@@ -4,7 +4,7 @@ from time import sleep
 from selenium.webdriver.common.by import By
 
 booking_site_url = 'https://www.recreation.gov/venues/VR2828/details/kpf4lm06qvdb'
-day_of_week = 'Wednesday, April 26, 2023'
+day_of_week = 'Wednesday, May 3, 2023'
 res_time = '1300-1500'
 login_email = 'megan@volosports.com'
 login_password = 'Volo123!'
