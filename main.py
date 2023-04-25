@@ -4,11 +4,11 @@ from time import sleep
 from selenium.webdriver.common.by import By
 import json
 
-booking_site_url = 'https://www.recreation.gov/venues/VR2828/details/kpf4lm06qvdb'
-day_of_week = 'Wednesday, May 3, 2023'
-res_time = '1300-1500'
-login_email = 'megan@volosports.com'
-login_password = 'Volo123!'
+#booking_site_url = 'https://www.recreation.gov/venues/VR2828/details/kpf4lm06qvdb'
+#day_of_week = 'Wednesday, May 3, 2023'
+#res_time = '1300-1500'
+#login_email = 'megan@volosports.com'
+#login_password = 'Volo123!'
 
 def handler(event=None, context=None):
 
@@ -34,7 +34,7 @@ def handler(event=None, context=None):
     '''
     Select correct month
     '''
-    driver.get(booking_site_url)
+    driver.get(event["booking_site_url"])
     driver.find_element(By.CSS_SELECTOR, '.sarsa-day-picker-range-controller-month-navigation-button.right').click() 
     sleep(.5)
 
@@ -43,7 +43,7 @@ def handler(event=None, context=None):
     '''
     calendar_days = driver.find_elements(By.CLASS_NAME, 'CalendarDay')
     for day in calendar_days: 
-        if(day.get_attribute('aria-label') == day_of_week):     
+        if(day.get_attribute('aria-label') == event["day_of_week"]):     
             day.click()
 
     '''
@@ -56,7 +56,7 @@ def handler(event=None, context=None):
                 try:
                     timeInput = time.find_element(By.XPATH, './/input')
                     value = timeInput.get_attribute('value')
-                    if(value == res_time):
+                    if(value == event["res_time"]):
                         time.click()          
                 except Exception as e:
                     continue  
@@ -65,7 +65,7 @@ def handler(event=None, context=None):
         Login to account
         '''
     driver.find_element(By.ID, 'email').send_keys(event["login_email"])
-    driver.find_element(By.ID, 'rec-acct-sign-in-password').send_keys(login_password)
+    driver.find_element(By.ID, 'rec-acct-sign-in-password').send_keys(event["login_password"])
     buttons = driver.find_elements(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
     for button in buttons: 
             if(button.get_attribute('aria-label') == 'Log In'):
