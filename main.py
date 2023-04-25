@@ -7,7 +7,7 @@ import json
 booking_site_url = 'https://www.recreation.gov/venues/VR2828/details/kpf4lm06qvdb'
 day_of_week = 'Wednesday, May 3, 2023'
 res_time = '1300-1500'
-#login_email = 'megan@volosports.com'
+login_email = 'megan@volosports.com'
 login_password = 'Volo123!'
 
 def handler(event=None, context=None):
@@ -64,7 +64,7 @@ def handler(event=None, context=None):
     '''
         Login to account
         '''
-    driver.find_element(By.ID, 'email').send_keys(event['login_email'])
+    driver.find_element(By.ID, 'email').send_keys(login_email)
     driver.find_element(By.ID, 'rec-acct-sign-in-password').send_keys(login_password)
     buttons = driver.find_elements(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
     for button in buttons: 
