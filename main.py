@@ -28,14 +28,64 @@ def handler(event=None, context=None):
     driver.get(booking_site_url)
     
     try:
+	'''
+        Select correct month
+        '''
         driver.get(booking_site_url)
         driver.find_element(By.CSS_SELECTOR, '.sarsa-day-picker-range-controller-month-navigation-button.right').click() 
         sleep(.5)
+	'''
+        Select correct day
+        '''
+	calendar_days = driver.find_elements(By.CLASS_NAME, 'CalendarDay')
+        for day in calendar_days: 
+            if(day.get_attribute('aria-label') == day_of_week):    
+                day.click()
+        '''
+        Select correct time
+        '''
+        times_block = driver.find_elements(By.CLASS_NAME, 'venue-reservation-radio-pill')
+        for time_block in times_block:
+            times = time_block.find_elements(By.XPATH, './div')[2].find_elements(By.XPATH, './div/div/label')
+            for time in times:
+                try:
+                    timeInput = time.find_element(By.XPATH, './/input')
+                    value = timeInput.get_attribute('value')
+                    if(value == res_time):
+                        time.click()            
+                except Exception as e:
+                    continue  	
+        '''
+        Add group size 50
+        '''
+        driver.find_element(By.ID, 'group_size').send_keys('50')
+	
+	'''
+        Submit form
+        '''
+        button = driver.find_element(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
+        button.click()
+        sleep(.5)
+
+        '''
+        Login to account
+        '''
+        driver.find_element(By.ID, 'email').send_keys(login_email)
+        driver.find_element(By.ID, 'rec-acct-sign-in-password').send_keys(login_password)
+        buttons = driver.find_elements(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
+        for button in buttons: 
+            if(button.get_attribute('aria-label') == 'Log In'):
+                button.click()
+                break
+
+        '''
+        Freeze to view (comment out when live)
+        '''        
+        sleep(1)
+	
         driver.get("https://example.com/")
         return driver.find_element(by=By.XPATH, value="//html").text
     except Exception as e:
         print(e)
-        #return False
     finally:
-	# close the drivers
         driver.quit()
