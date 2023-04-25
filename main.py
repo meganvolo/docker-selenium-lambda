@@ -84,7 +84,4 @@ def handler(event=None, context=None):
         Freeze to view (comment out when live)
         '''        
     sleep(1)  
-	
-    driver.get("https://example.com/")
-    sleep(1)
-    return driver.find_element(by=By.XPATH, value="//html").text
+    return event
