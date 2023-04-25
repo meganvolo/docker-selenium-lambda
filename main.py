@@ -49,7 +49,7 @@ def handler(event=None, context=None):
     driver.find_element(By.ID, 'group_size').send_keys('50')
     button = driver.find_element(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
     button.click()
-    sleep(2)
+    sleep(5)
     driver.find_element(By.ID, 'email').send_keys(login_email)
     driver.find_element(By.ID, 'rec-acct-sign-in-password').send_keys(login_password)
     buttons = driver.find_elements(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
