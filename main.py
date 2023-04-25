@@ -31,13 +31,12 @@ def handler(event=None, context=None):
         driver.get(booking_site_url)
         driver.find_element(By.CSS_SELECTOR, '.sarsa-day-picker-range-controller-month-navigation-button.right').click() 
         sleep(.5)
+	driver.get("https://example.com/")
+    
+    	return driver.find_element(by=By.XPATH, value="//html").text
     except Exception as e:
         print(e)
         #return False
     finally:
 	# close the drivers
         driver.quit()
-    
-    driver.get("https://example.com/")
-    
-    return driver.find_element(by=By.XPATH, value="//html").text
