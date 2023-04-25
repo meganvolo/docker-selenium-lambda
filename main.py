@@ -12,7 +12,8 @@ login_password = 'Volo123!'
 
 def handler(event=None, context=None):
 
-    params = json.loads(event)
+    #params = json.loads(event)
+
 
     options = webdriver.ChromeOptions()
     options.binary_location = '/opt/chrome/chrome'
@@ -63,7 +64,7 @@ def handler(event=None, context=None):
     '''
         Login to account
         '''
-    driver.find_element(By.ID, 'email').send_keys(login_email)
+    driver.find_element(By.ID, 'email').send_keys(event['login_email'])
     driver.find_element(By.ID, 'rec-acct-sign-in-password').send_keys(login_password)
     buttons = driver.find_elements(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
     for button in buttons: 
