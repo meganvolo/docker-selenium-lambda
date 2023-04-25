@@ -1,5 +1,6 @@
 from selenium import webdriver
 from tempfile import mkdtemp
+from time import sleep
 from selenium.webdriver.common.by import By
 
 booking_site_url = 'https://www.recreation.gov/venues/VR2828/details/kpf4lm06qvdb'
@@ -41,7 +42,7 @@ def handler(event=None, context=None):
             try:
                 timeInput = time.find_element(By.XPATH, './/input')
                 value = timeInput.get_attribute('value')
-	        if(value == res_time):
+                if(value == res_time):
                    time.click()            
             except Exception as e:
                 continue  	
@@ -53,9 +54,9 @@ def handler(event=None, context=None):
     driver.find_element(By.ID, 'rec-acct-sign-in-password').send_keys(login_password)
     buttons = driver.find_elements(By.CSS_SELECTOR, '.sarsa-button.sarsa-button-primary')
     for button in buttons: 
-        if(button.get_attribute('aria-label') == 'Log In')
-	    button.click()
-            break  
+        if(button.get_attribute('aria-label') == 'Log In'):
+           button.click()
+           break
     sleep(1)
 	
     driver.get("https://example.com/")
