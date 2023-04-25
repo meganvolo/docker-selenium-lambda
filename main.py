@@ -31,7 +31,7 @@ def handler(event=None, context=None):
         driver.get(booking_site_url)
         driver.find_element(By.CSS_SELECTOR, '.sarsa-day-picker-range-controller-month-navigation-button.right').click() 
         sleep(.5)
-	calendar_days = driver.find_elements(By.CLASS_NAME, 'CalendarDay')
+        calendar_days = driver.find_elements(By.CLASS_NAME, 'CalendarDay')
         for day in calendar_days: 
             if(day.get_attribute('aria-label') == day_of_week):    
                 day.click()
