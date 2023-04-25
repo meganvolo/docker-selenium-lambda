@@ -2,14 +2,18 @@ from selenium import webdriver
 from tempfile import mkdtemp
 from time import sleep
 from selenium.webdriver.common.by import By
+import json
 
 booking_site_url = 'https://www.recreation.gov/venues/VR2828/details/kpf4lm06qvdb'
 day_of_week = 'Wednesday, May 3, 2023'
 res_time = '1300-1500'
-login_email = 'megan@volosports.com'
+#login_email = 'megan@volosports.com'
 login_password = 'Volo123!'
 
 def handler(event=None, context=None):
+
+    params = json.loads(event)
+
     options = webdriver.ChromeOptions()
     options.binary_location = '/opt/chrome/chrome'
     options.add_argument('--headless')
