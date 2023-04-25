@@ -87,5 +87,3 @@ def handler(event=None, context=None):
         return driver.find_element(by=By.XPATH, value="//html").text
     except Exception as e:
         print(e)
-    finally:
-        driver.quit()
